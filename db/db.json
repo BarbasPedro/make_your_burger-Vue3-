@@ -79,9 +79,9 @@
   ],
   "burgers": [
     {
-      "id": "a73f",
-      "name": "Pedro",
-      "meat": "Alcatra",
+      "id": "18bc",
+      "name": "Sheri",
+      "meat": "Veggie burger",
       "bread": "Italiano Branco",
       "options": [
         "Bacon"
@@ -89,53 +89,17 @@
       "status": "Solicitado"
     },
     {
-      "id": "beca",
+      "id": "5aec",
       "name": "Pedro",
       "meat": "Picanha",
       "bread": "Italiano Branco",
       "options": [
         "Bacon",
         "Cebola roxa",
-        "Pepino",
+        "Cheddar",
         "Tomate",
-        "Cheddar"
+        "Pepino"
       ],
-      "status": "Solicitado"
-    },
-    {
-      "id": "1292",
-      "name": "Pedro",
-      "meat": "Picanha",
-      "bread": "Parmesão e Orégano",
-      "options": [
-        "Bacon"
-      ],
-      "status": "Solicitado"
-    },
-    {
-      "id": "ca53",
-      "name": "Pedro",
-      "meat": "Alcatra",
-      "bread": "3 Queijos",
-      "options": [
-        "Bacon"
-      ],
-      "status": "Solicitado"
-    },
-    {
-      "id": "0a90",
-      "name": "Teste",
-      "meat": "Alcatra",
-      "bread": "Italiano Branco",
-      "options": [],
-      "status": "Solicitado"
-    },
-    {
-      "id": "37a5",
-      "name": "Teste",
-      "meat": "Alcatra",
-      "bread": "Parmesão e Orégano",
-      "options": [],
       "status": "Solicitado"
     }
   ]

@@ -1,28 +1,36 @@
 <template>
   <div id="burger-table">
     <div id="burger-table-heading">
-      <div class="order-id">#</div>
+      <div class="order-id">#Cód.</div>
       <div>Cliente</div>
       <div>Pão</div>
       <div>Carne</div>
       <div>Opcionais</div>
       <div>Ações</div>
     </div>
-    <div id="burguer-table-rows">
-      <div class="burger-table-row">
-        <div class="order-number">1</div>
-        <div>Jõao</div>
-        <div>Pão</div>
-        <div>Carne</div>
+    <div id="burger-table-rows">
+      <div
+        class="burger-table-row"
+        v-for="(burger, index) in burgers"
+        :key="index"
+      >
+        <div class="order-number">{{ burger.id }}</div>
+        <div>{{ burger.name }}</div>
+        <div>{{ burger.meat }}</div>
+        <div>{{ burger.bread }}</div>
         <ul>
-          <li>Cebola</li>
-          <li>Picles</li>
+          <li v-for="option in burger.options" :key="option.id">
+            {{ option }}
+          </li>
         </ul>
         <div>
           <select name="status" class="status">
             <option value="Selecione">Selecione</option>
+            <option v-for="s in status" :value="s.tipo" :key="s.id" :selected="burger.status == s.tipo">
+              {{ s.tipo }}
+            </option>
           </select>
-          <button class="delete-btn">Cancelar</button>
+          <button class="delete-btn" @click="deleteOrder(burger.id)">Remover</button>
         </div>
       </div>
     </div>
@@ -32,6 +40,43 @@
 <script>
 export default {
   name: "Dashboard",
+  data() {
+    return {
+      burgers: null,
+      burger_id: null,
+      status: [],
+    };
+  },
+  methods: {
+    async getOrders() {
+      const req = await fetch("http://localhost:3000/burgers");
+
+      const data = await req.json();
+
+      this.burgers = data;
+
+      this.getStatus()
+    },
+    async getStatus() {
+      const req = await fetch("http://localhost:3000/status");
+
+      const data = await req.json();
+
+      this.status = data;
+    },
+    async deleteOrder(id) {
+      const req = await fetch(`http://localhost:3000/burgers/${id}`, {
+        method: "DELETE"
+      });
+
+      const res = await req.json()
+
+      this.getOrders()
+    }
+  },
+  mounted() {
+    this.getOrders();
+  },
 };
 </script>
 
@@ -61,7 +106,8 @@ export default {
 }
 
 #burger-table-heading div,
-.burger-table-row div, ul {
+.burger-table-row div,
+ul {
   width: 19%;
 }
 

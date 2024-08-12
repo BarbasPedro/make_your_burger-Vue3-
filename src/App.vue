@@ -30,6 +30,10 @@ export default {
     box-sizing: border-box;
 }
 
+ul {
+    list-style: none;
+}
+
 .main-container {
     margin: 50px;
     min-height: 250px;
