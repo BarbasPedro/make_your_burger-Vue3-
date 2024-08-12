@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <Message :msg="msg" v-show="msg"/>
+  </div>
   <div id="burger-table">
     <div id="burger-table-heading">
       <div class="order-id">#Cód.</div>
@@ -24,7 +27,11 @@
           </li>
         </ul>
         <div>
-          <select name="status" class="status" @change="updateBurger($event, burger.id)">
+          <select
+            name="status"
+            class="status"
+            @change="updateBurger($event, burger.id)"
+          >
             <option value="Selecione">Selecione</option>
             <option
               v-for="s in status"
@@ -45,13 +52,19 @@
 </template>
 
 <script>
+import Message from "./Message.vue";
+
 export default {
   name: "Dashboard",
+  components: {
+    Message,
+  },
   data() {
     return {
       burgers: null,
       burger_id: null,
       status: [],
+      msg: null,
     };
   },
   methods: {
@@ -62,7 +75,7 @@ export default {
 
       this.burgers = data;
 
-      this.getStatus()
+      this.getStatus();
     },
     async getStatus() {
       const req = await fetch("http://localhost:3000/status");
@@ -73,29 +86,34 @@ export default {
     },
     async deleteOrder(id) {
       const req = await fetch(`http://localhost:3000/burgers/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
       });
 
-      const res = await req.json()
+      const res = await req.json();
 
-      this.getOrders()
+      this.msg = `Pedido removido com sucesso!`;
+
+      setTimeout(() => (this.msg = ""), 3000);
+
+      this.getOrders();
     },
     async updateBurger(e, id) {
-      const option = e.target.value
+      const option = e.target.value;
 
-      const dataJson = JSON.stringify({ status: option })
+      const dataJson = JSON.stringify({ status: option });
 
       const req = await fetch(`http://localhost:3000/burgers/${id}`, {
         method: "PATCH",
-        headers: {"Content-Type": "application/json"},
-        body: dataJson
-      })
+        headers: { "Content-Type": "application/json" },
+        body: dataJson,
+      });
 
       const res = req.json();
 
-      console.log(res);
+      this.msg = `Pedido atualizado com sucesso!`;
 
-    }
+      setTimeout(() => (this.msg = ""), 3000);
+    },
   },
   mounted() {
     this.getOrders();

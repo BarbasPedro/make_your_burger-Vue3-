@@ -101,17 +101,6 @@
         "Pepino"
       ],
       "status": "Em produção"
-    },
-    {
-      "id": "c8bb",
-      "name": "Joco",
-      "meat": "Alcatra",
-      "bread": "Parmesão e Orégano",
-      "options": [
-        "Bacon",
-        "Pepino"
-      ],
-      "status": "Em produção"
     }
   ]
 }
